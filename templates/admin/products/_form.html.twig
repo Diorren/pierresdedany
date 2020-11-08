@@ -1,0 +1,34 @@
+{{ form_start(productForm) }}
+    <div class="container-fluid m-3">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-9">
+                {{ form_row(productForm.name) }}
+                {{ form_row(productForm.content) }}
+                {{ form_row(productForm.stock) }}
+                {{ form_row(productForm.price) }}
+                {{ form_row(productForm.categories) }}
+                {{ form_row(productForm.images, {'attr': {'placeholder': "Sélectionnez une image..."}}) }}
+            </div>
+                {# Vérifier si la route est "admin_products_edit" on affiche les images #}
+                {% if app.request.attributes.get('_route') == 'admin_products_edit' %}
+                <div class="col-md-3">
+                    <h2>Images:</h2>
+
+                {# Boucle qui affiche toutes les images du produit #}
+                    {% for image in product.images %}
+                        <div class="row align-items-center ml-2 mt-2">           
+                            <img src="{{ asset('uploads/' ~ image.name) }}" alt="Image" width="100">	
+                            <p class="ml-3">
+                                <a href="{{ path('admin_products_delete_image', {id: image.id}) }}"
+                                data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">Supprimer</a>					
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-lg btn-primary">Valider</button>
+        </div>
+    </div>
+{{ form_end(productForm) }}

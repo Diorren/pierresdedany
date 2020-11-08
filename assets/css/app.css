@@ -1,0 +1,560 @@
+@import "~bootstrap";
+@import "~@fortawesome/fontawesome-free/css/fontawesome";
+@import "~@fortawesome/fontawesome-free/css/regular";
+@import "~@fortawesome/fontawesome-free/css/solid";
+@import "~@fortawesome/fontawesome-free/css/brands";
+
+html, body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-family: 'Kalam', cursive;
+}
+.container {
+    margin-top: 70px;
+}
+
+/* LOGIN */
+#mot {
+    font-weight: bold;
+    color: rgb(29, 32, 196);
+} 
+#mot:hover {
+    text-decoration: underline;
+    color: rgb(13, 13, 14);
+}
+
+/* HEADER */
+#header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgb(216, 105, 53) !important;
+    z-index: 100;
+}
+#header .text {
+    font-size: 1.3em;
+    color: rgb(0, 0, 0);
+}
+#header .text:hover {
+    color: rgb(250, 248, 248);
+}
+#text-name {
+    color: rgb(250, 248, 248);
+    font-size: 1.3em;
+}
+#text-name:hover {
+    color: rgb(0, 0, 0);
+    font-size: 1.3em;
+}
+.dropdown-menu {
+    background-color: rgb(246, 228, 213);
+}
+.dropdown-menu a {
+    color: rgb(0, 0, 0);
+    font-size: 1em;
+}
+#search {
+    position: absolute;
+    top: 20%;
+    right: 13%;
+    background-color: rgb(140, 119, 92);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;    
+}
+#search:hover {
+    background-color: transparent;
+}
+.searchConnect {
+    margin-right: 12em;
+}
+.panier {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-left: 30em;
+}
+.panier a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+.panier .badge {
+    position: absolute;
+    width: 23px;
+    height: 23px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+}
+.loupe {
+    color: rgb(0, 0, 0);
+    margin: 45%;
+    padding: 45%;
+}
+/* NAVBAR LATERAL - FOOTER */
+.shadow {
+    position: relative;  
+    box-shadow: 6px 6px 6px rgba(163, 163, 165, 0.5);
+}
+.lateral a {
+    color: rgb(10, 10, 10);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* HOME */
+.zoom {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    height: 600px;
+}
+.background {
+    position: relative;
+    background-color: #fff;
+    background-size: cover;
+    width: 100%;
+    height: 600px;
+    -webkit-animation: zoom 30s;
+    animation: zoom 30s
+}
+@-webkit-keyframes zoom {
+    from {
+    	-webkit-transform: scale(1,1);
+    }
+    to {
+    	-webkit-transform: scale(1.5,1.5);
+    }
+}
+/* Standard */
+@keyframes zoom {
+   from {
+        transform: scale(1,1);
+   }
+   to {
+        transform: scale(1.5,1.5);
+   }
+}
+.title1 {
+    position: absolute;
+    top: 7%;
+    color: rgba(255, 255, 255);
+    text-shadow: 2px 2px 3px rgb(12, 12, 12);
+}
+.title1 h1 {
+    font-size: 3em;
+}
+.title2 {
+    position: absolute;
+    top: 3%;
+    left: 10%;
+    font-size: 2.2em;
+    color: rgba(255, 255, 255);
+    text-transform: uppercase;
+    text-shadow: 2px 2px 3px black;
+    font-family: 'Quicksand', cursive;
+}
+.logo {
+    position: absolute;
+    top: 3%;
+    left: 2%;
+}
+.logoImg {
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+}
+
+/*INFOS*/
+.infos {
+    background-color: rgb(167, 167, 168,0.5);
+    width: 100%;
+    height: 100px;
+    margin: 0;
+}
+.infos span {
+    text-transform: uppercase;
+}
+.securise,.rapide,.nous {
+    color: rgb(223, 74, 74);
+}
+
+/* MENU */
+.divider {
+    border-top: 2px solid rgba(62, 62, 63);
+}
+.title-menu {
+    font-size: 3em;
+    color: rgba(211, 70, 14, 0.8);
+}
+.subtitle {
+    font-size: 2em;
+}
+.pierres {
+    filter: brightness(70%);
+    -webkit-filter: brightness(70%);
+    width: 100%;
+    height: 100%;
+}
+.pierres:hover {
+    opacity: 0.7;
+    -webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out 
+}
+.bracelets {
+    filter: brightness(70%);
+    -webkit-filter: brightness(70%);
+    width: 100%;
+    height: 100%;
+}
+.bracelets:hover {
+    opacity: 0.7;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out 
+}
+.bien-etre {
+    filter: brightness(70%);
+    -webkit-filter: brightness(70%);
+    width: 100%;
+    height: 100%;
+}
+.bien-etre:hover {
+    opacity: 0.7;
+    -webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out 
+}
+.menu {
+    display: flex;
+    justify-content: center;
+}
+.title3 {
+    position: absolute;
+    top: 50%;
+    font-size: 3em;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    text-shadow: 2px 2px 3px black;
+}
+
+/* PRODUCTS */
+#news,#sales {
+    text-transform: uppercase;
+    color: black;
+    font-size: 2em;
+}
+.tabs .tab-titles li a.active {
+    text-decoration: underline;
+}
+.trait-vert {
+    height: 50px;
+    border-left: 2px solid black;
+}
+.tabs > div.active {
+    display: inline-flex
+}
+.tabs > div {
+    display: none;
+}
+/* _products & _bestsellers*/
+#collection {
+    border-radius: 5px;
+}
+.title-product {
+    background-color: rgb(247, 216, 191);
+    text-transform: uppercase;
+}
+.title-bestsellers {
+    background-color: rgb(230, 145, 76);
+    text-transform: uppercase;
+}
+.article {
+    position: relative;
+}
+#promo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+}
+
+/* LITHOTHERAPIE */
+#bandeau {
+    position: relative;
+}
+.linear-gradient {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(rgb(233, 143, 59),rgb(255,255,255));
+}
+.litho {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #fff;
+    background-size: cover;
+    opacity: 0.3;
+}
+.background-litho {
+    position: relative;
+    padding-top: 50px;
+}
+.box1 {
+    background-color: rgb(250, 248, 248);
+    box-shadow: 0em 0em 0.5em 0.2em rgba(139, 139, 139, 0.5);
+    overflow: hidden;
+    transition: 2s;
+    margin-bottom: 30px;
+}
+.box1:hover {
+    box-shadow: 0.5em 0.5em 0.5em rgba(75 ,74 ,74);
+}
+.fond {
+    background-color: rgb(216, 105, 53);
+}
+#malachite {
+    text-transform: uppercase;
+}
+#litho-trait {
+    width: 80%;
+    border: 1px solid rgb(0, 0, 0);
+}
+.box2 {
+    background-color: rgb(250, 248, 248);
+    box-shadow: 0em 0em 0.5em 0.2em rgba(139, 139, 139, 0.5);
+    transition: 2s;
+    margin-bottom: 30px;
+}
+.box2:hover {
+    box-shadow: 0.5em 0.5em 0.5em rgba(75, 74, 74);
+}
+#obsidienne {
+    text-transform: uppercase;
+}
+#litho-trait2 {
+    width: 50%;
+    border: none;
+    border-top: 3px double rgb(0, 0, 0);
+}
+.litho-text {
+    font-size: 1.5em;
+}
+
+/* FOOTER */
+.footer-first {
+    background-color: rgb(216, 105, 53);
+    width: 100%;
+    height: 100px;
+}
+.social {
+    font-size: 2em;
+    color: rgb(10, 10, 10);
+}
+.footer {
+    background-color: rgba(238, 142, 64, 0.4);
+    width: 100%;
+    height: 380px;
+}
+.facebook,.instagram,.twitter,.youtube {
+    color: rgb(0, 0, 0);
+}
+.facebook:hover {
+    color: rgb(35, 79, 155);
+}
+.instagram:hover {
+    color: rgb(230, 19, 109);
+}
+.twitter:hover {
+    color: rgb(255, 255, 255);
+}
+.youtube:hover {
+    color: rgb(230, 0, 5);
+}
+.list li {
+    list-style-type: none;
+}
+.list a { 
+    color: rgb(0,0,0);   
+    text-decoration: none;
+}
+.list1 {
+    list-style-type: none;
+}
+.list2 a {
+    color: rgb(0, 0, 0);
+}
+.bpage {
+    width: 97%;
+    border: 0.3px solid rgb(140, 119, 92);
+}
+.fab {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* MINERAUX */
+#mineraux {
+    width: 100%;
+}
+
+/* SEARCH */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+.filter {
+    margin-top: 3em;
+    display: block;
+    position: sticky;
+    top: 20px;
+}
+.filtrer {
+    background-color: rgb(63, 184, 175);
+    color: rgb(250, 248, 248);
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+.buttonPaid {
+    background-color:rgb(63, 184, 175);
+    color: rgb(250, 248, 248);
+}
+
+/* PAGINATION */
+.pagination, .page-link, .page-item, .disabled {
+    color: rgb(35, 26, 24);
+}
+.page-item.active .page-link {
+    background-color: rgb(63, 184, 175);
+}
+.pagination {
+    justify-content: center;
+}
+
+/* RESPONSIVE */
+@media (max-width:768px){
+   #bandeau {
+       flex-direction: column;
+   }
+   #bandeau h2{
+       font-size: 2em;
+   }
+   .title1 h1 {
+       font-size: 2em;
+   }
+   .infos {
+       height: auto;
+   }
+}
+@media (max-width:576px){
+    .title1 h1 {
+        font-size: 2em;
+    }
+    .title1 {
+        top: 33%;
+    }
+    .infos {
+        height: auto;
+    }
+    .social-menu {
+        font-size: 0.5em;
+    }
+}
+.navbar-brand-user{
+    background-color: aqua;
+    height: 50px;
+}
+
+/* BARRE FLOTTANTE*/
+#hero {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(0deg, #d66a22 0%, #e07f62 100%);
+  padding: 0;
+}
+
+.hero-waves {
+  display: block;
+  width: 100%;
+  height: 60px;
+  position: relative;
+}
+
+.wave1 use {
+  -webkit-animation: move-forever1 10s linear infinite;
+  animation: move-forever1 10s linear infinite;
+  -webkit-animation-delay: -2s;
+  animation-delay: -2s;
+}
+
+.wave2 use {
+  -webkit-animation: move-forever2 8s linear infinite;
+  animation: move-forever2 8s linear infinite;
+  -webkit-animation-delay: -2s;
+  animation-delay: -2s;
+}
+
+.wave3 use {
+  -webkit-animation: move-forever3 6s linear infinite;
+  animation: move-forever3 6s linear infinite;
+  -webkit-animation-delay: -2s;
+  animation-delay: -2s;
+}
+
+@-webkit-keyframes move-forever1 {
+  0% {
+    transform: translate(85px, 0%);
+  }
+  100% {
+    transform: translate(-90px, 0%);
+  }
+}
+
+@keyframes move-forever1 {
+  0% {
+    transform: translate(85px, 0%);
+  }
+  100% {
+    transform: translate(-90px, 0%);
+  }
+}
+
+@-webkit-keyframes move-forever2 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+  100% {
+    transform: translate(85px, 0%);
+  }
+}
+
+@keyframes move-forever2 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+  100% {
+    transform: translate(85px, 0%);
+  }
+}
+
+@-webkit-keyframes move-forever3 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+  100% {
+    transform: translate(85px, 0%);
+  }
+}
+
+@keyframes move-forever3 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+  100% {
+    transform: translate(85px, 0%);
+  }
+}

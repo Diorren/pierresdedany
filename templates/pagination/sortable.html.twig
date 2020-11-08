@@ -1,0 +1,19 @@
+{#
+/**
+ * Fichier original knp modifié
+ */
+#}
+<a{% for attr, value  in options | merge({class: 'btn btn-secondary ml-2'}) %} {{ attr }}="{{ value }}"{% endfor %} style="color: #000;">
+    <span class="pull-right">
+        {% if sorted %}
+            {% if direction == 'desc' %}
+                <i class="fa fa-sort-down"></i>
+            {% else %}
+                <i class="fa fa-sort-up"></i>
+            {% endif %}
+        {% else %}
+            <i class="fa fa-sort" style="color: #d2d6de;"></i>
+        {% endif %}
+    </span>
+    {{ title }}
+</a>

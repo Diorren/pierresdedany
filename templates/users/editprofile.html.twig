@@ -1,0 +1,24 @@
+{% extends 'users/base.html.twig' %}
+
+{% block title %} Modification du Profil de {{ app.user.firstname}} {{app.user.lastname}}{% endblock %}
+
+{% block body %}
+
+    <div class="container text-center mt-3 mb-3 pt-5">
+        <h1 class="h2">Profil de {{app.user.firstname}} {{app.user.lastname}}</h1>
+            {{ form_start(editProfile) }}
+            {{ form_row(editProfile.lastname, {label: 'Nom'}) }}
+            {{ form_row(editProfile.firstname, {label: 'Prénom'}) }}
+            {{ form_row(editProfile.email, {label: 'Email'}) }}
+            {{ form_row(editProfile.address, {label: 'Adresse'}) }}
+            {{ form_row(editProfile.city, {label: 'Ville'}) }}
+            {{ form_row(editProfile.postalCode, {label: 'Code Postal'}) }}
+            {{ form_row(editProfile.phone, {label: 'Téléphone'}) }}
+            <button type="submit" class="btn btn-lg btn-primary mr-3">Valider</button>
+            <a href="{{ path('users') }}">
+                <button type="button" class="btn btn-lg btn-dark">Retour</button>
+            </a>
+            {{ form_end(editProfile) }}
+    </div>
+
+{% endblock %}

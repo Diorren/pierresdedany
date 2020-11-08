@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title 'Gérer les produits' %}
+
+{% block body %}
+<div class="text-center m-3">
+	<h1 class="mb-3">Gérer les produits</h1>
+	<a href="{{ path('admin_products_add') }}" type="button" class="btn btn-primary mb-3">Ajouter un produit</a>
+</div>
+<div class="container">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nom</th>
+				<th>Contenu</th>
+				<th>Date</th>
+				<th>Catégorie</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Image</th>
+				<th>Actions</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>				
+			{% for product in products %}
+				<tr>
+					<td>{{product.id}}</td>
+					<td>{{product.name}}</td>
+					<td>{{product.content | raw}}</td>
+					<td>{{product.createdAt | date}}</td>
+					<td>{{product.categories}}</td>
+					<td>{{product.stock}}</td>
+					<td>{{product.price}}</td>
+					<td>
+					
+					{# Condition qui affiche une seule image s'il existe des images #}
+					{% if product.images is not empty %}
+						<img src="{{ asset('uploads/'~ product.images[0].name) }}" alt="Image" width="100">						
+					{% endif %}
+					</td>
+					<td class="text-center">
+						<a href="{{ path("admin_products_edit", {id: product.id}) }}" type="button" class="btn btn-secondary btn-sm">Modifier</a>
+					</td>				
+					<td>
+					<a href="{{ path('admin_products_delete', {id: product.id}) }}" type="button" class="btn btn-danger btn-sm" onclick="return confirm(`Etes-vous sûr de vouloir supprimer ce produit ?`)">Supprimer</a>
+					</td>				
+				</tr>
+		</tbody>
+			{% endfor %}
+	</table>		
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+

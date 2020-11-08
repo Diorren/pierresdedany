@@ -1,0 +1,21 @@
+{% set url = path('products_single',{slug: product.slug}) %}
+<article class="col-md-3">
+    <div class="card mb-3">
+        <h3 class="h4 card-header text-white bg-secondary">Catégories: {{product.categories.name}}</h3>
+        <div class="card-body bg-secondary bg-light">
+            <a href="{{url}}">
+            {% if product.images is not empty %}
+                <img id="collection" src="{{ asset('uploads/'~ product.images[0].name) }}" alt="{{product.name}}"
+                style="height:200px;width:100%;display:block;">
+            {% endif %}
+        </a>
+            <h4 class="card-title">{{ product.name }}</h4>
+            <p class="card-text">{{ product.content | raw }}</p>
+            <div class="row justify-content-between align-items-center">
+                <p class="card-text btn btn-outline-primary">Prix: {{ product.price }} &euro;</p>
+                <a href="{{path('cart_add', {'id': product.id}) }}" class="btn btn-success float-right"><i class="fas fa-shopping-cart"></i>Ajouter</a>
+                <p><a href="{{ path('product_single',{'slug':product.slug}) }}" class="btn bg-info text-white">Acheter</a></p>
+            </div>
+        </div>
+    </div>
+</article>

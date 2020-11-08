@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title ('Produits par Catégorie') %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="mb-3">Liste des produits de la catégorie: {{ category.name }}</h1>
+    <div class="row justify-content-center">
+        
+            {% for product in productsByCat %}
+
+                {% include 'products/_product.html.twig' %}
+                
+            {% endfor %}       
+        
+    </div>
+    {{ knp_pagination_render(productsByCat) }}
+</div>
+
+{% endblock %}

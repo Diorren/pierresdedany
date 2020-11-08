@@ -1,0 +1,45 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title 'Liste des utilisateurs' %}
+
+{% block body %}
+    <div class="text-center m-3">
+        <h1>Gérer les utilisateurs</h1>
+        <a href="#" type="button" class="btn btn-primary mt-3 mb-3">Ajouter un utilisateur</a>
+    </div>
+    <div class="container">
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Adresse</th>
+                    <th>Code Postal</th>
+                    <th>Ville</th>
+                    <th>Mail</th>
+                    <th>Téléphone</th>
+                    <th>Nbre de Commandes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.lastname}}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.address }}</td>
+                        <td>{{ user.postalCode}}</td>
+                        <td>{{ user.city }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phone }}</td>
+                        {% for cart in user.carts %}
+                            <td>{{ user.carts | length > 0 }}</td>
+                        {% endfor %}
+                        <td></td>                                                   
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>    
+    </div>
+{% endblock %}

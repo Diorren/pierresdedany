@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>{% block title %}Welcome admin{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('admin') }}
+        {% endblock %}
+    </head>
+    <body>
+        {% block header %}
+            {% include "admin/partials/header.html.twig" %}
+        {% endblock %}
+
+        {% block body %}{% endblock %}
+
+        {% block footer %}
+            {% include "admin/partials/footer.html.twig" %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('admin') }}
+        {% endblock %}
+    </body>
+</html>

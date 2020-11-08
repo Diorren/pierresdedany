@@ -1,0 +1,216 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('navbar') }}
+{% endblock %}
+
+{% block body %}
+<main>
+    {# HOME #}    
+    <section class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="zoom">
+                <img src="{{ asset('build/images/background.jpg') }}" class="img-fluid background" alt="Background">
+            </div>
+            <div class="col-md-6 title1">
+                <h1 class="text-center">Entrez dans mon univers et venez découvrir 
+                ma collection de bracelets confectionnés à la main...</h1>
+            </div>
+            <div class="col-md-4 logo">
+                <img src="{{ asset('build/images/logo.png') }}" class="img-fluid logoImg" alt="Logo">
+            </div>        
+            <h2 class="title2">Les Pierres de Dany</h2>
+        </div>
+    </section>
+    {# INFOS #}
+    <section class="container-fluid p-0">
+        <div class="row justify-content-around infos">
+            <div class="col-md-3 row justify-content-between align-items-center">
+                <i class="fas fa-lock fa-3x"></i>
+                <div class="col pt-2">
+                    <span>Paiement 
+                        <span class="securise">100% sécurisé</span>
+                    </span>                   
+                    <p>Chèque, Stripe</p>
+                </div>   
+            </div>        
+            <div class="col-md-3 row justify-content-between align-items-center">
+                <i class="fas fa-plane-departure fa-3x"></i>
+                <div class="col pt-2">
+                    <span>Livraison 
+                        <span class="rapide">rapide</span>
+                    </span>                   
+                    <p>En lettre suivie ou Colissimo en 48 / 72h</p>
+                </div>   
+            </div>        
+            <div class="col-md-3 row justify-content-between align-items-center">
+                <i class="far fa-envelope fa-3x"></i>
+                <div class="col pt-2">
+                    <span>Contactez-<span class="nous">nous</span></span>                   
+                    <p>par formulaire</p>
+                </div>   
+            </div>        
+        </div>
+    </section>
+    {# MENU #}
+    <section class="container-fluid">
+        <div class="row justify-content-center align-items-center mt-2 mb-2">
+            <div class="col-md-2">
+                <hr class="divider">
+            </div>
+            <div class="col-md-6 text-center">
+                <p class="title-menu">Les Pierres de Dany, la lithothérapie</p>
+                <p class="subtitle">Bijoux, Pierres Naturelles, Bien-être</p>
+            </div>            
+            <div class="col-md-2">
+                <hr class="divider">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <a href="#" class="menu">
+                    <img src="{{ asset('build/images/pierres.jpg') }}" class="img-fluid pierres" alt="Pierres">
+                <h3 class="h1 title3">Minéraux</h3>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" class="menu">
+                    <img src="{{ asset('build/images/bracelets.jpeg') }}" class="img-fluid bracelets" alt="Bracelets">
+                <h3 class=" h1 title3">Confections</h3>
+                </a>            
+            </div>
+            <div class="col-md-3">
+                <a href="#" class="menu">
+                    <img src="{{ asset('build/images/bien-etre.jpg') }}" class="img-fluid bien-etre" alt="Bien-être">        
+                <h3 class="h1 title3">Bien-être</h3>
+                </a>
+            </div>
+        </div>    
+    </section>
+    {# PRODUCTS #}
+    <section class="container-fluid">
+        <div class="row justify-content-center mt-4 tabs">
+            <ul class="nav tab-titles">
+                <li class="nav-item">
+                    <a class="nav-link active pr-4" data-tabnum="0" href="#news" id="news">Nouveautés</a>
+                </li>
+                <p class="trait-vert mt-1"></p>
+                <li class="nav-item">
+                    <a class="nav-link pl-4" data-tabnum="1" href="#bestsellers" id="sales">Meilleures ventes</a>
+                </li>
+            </ul>
+            <div class="row active m-1" id="tab0"> 
+                {% for data in products %}
+                    {% include "admin/products/_product.html.twig" with {product: data.products} %}
+                {% endfor %}         
+            </div>
+            <div class="row m-1" id="tab1">                
+                {% for data in products %}
+                    {% include "admin/products/_bestsellers.html.twig" with {product: data.products} %}
+                {% endfor %}                      
+            </div>                 
+        </div>
+    </section>
+    </section>
+    {# HERO #}
+    <section id="hero" class="d-flex flex-column justify-content-end align-items-center">
+        <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none">
+            <defs>
+                <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+            </defs>
+            <g class="wave1">
+                <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)">
+            </g>
+            <g class="wave2">
+                <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)">
+            </g>
+            <g class="wave3">
+                <use xlink:href="#wave-path" x="50" y="9" fill="#fff">
+            </g>
+        </svg>
+    </section>
+    {# LITHOTHERAPIE #}  
+    <section class="container-fluid" id="bandeau">
+        <div class="row linear-gradient"></div>
+            <div class="row background-litho justify-content-around">
+                <img src="{{ asset('build/images/background-litho.jpg') }}" class="litho" alt="Lithothérapie">
+                <div class="col-md-5 row p-0 box1">
+                    <div class="col-md-6">
+                        <img src="{{ asset('build/images/malachite.png') }}" class="img-fluid" alt="Malachite">
+                    </div>
+                    <div class="col-md-6 fond">
+                        <h2 class="text-center text-uppercase mt-2">Indispensable</h2>
+                        <hr id="litho-trait">
+                        <p>
+                        Efficacité thérapeutique : importante.
+                        La <strong id="malachite">malachite </strong> améliore la capacité de persuasion et libère les blocages émotionnels du passé qui se sont enfouit au fil du temps dans les profondeurs de l’âme.
+                        En lithothérapie la malachite est une pierre très efficace contre les douleurs et contre les problèmes articulaires, absorbant les douleurs tel une éponge lorsqu’elle est appliqué sur les zones douloureuses.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-5 row p-0 box2">
+                    <div class="col-md-6">
+                        <img src="{{ asset('build/images/obsidienne.png') }}" class="img-fluid mt-5" alt="Obsidienne">
+                    </div>
+                    <div class="col-md-6 fond">
+                        <h2 class="text-center text-uppercase mt-2">Ancestrale</h2>
+                        <hr id="litho-trait">
+                        <p>
+                        L’<strong id="obsidienne">obsidienne </strong>est un verre volcanique vitreux composé de silice noir avec quelques nuances, qui nous allons voir ont une impacte sur les propriétés énergétiques. Son nom est issu du nom de son découvreur, Obsius, un romain d’Éthiopie.
+                        En lithothérapie l’obsidienne noire met face à ses vérités que l’on soit prêt ou pas, elle protège des énergies négatives et elle soulage l’arthrite.
+                        </p>
+                    </div>
+                </div>         
+                <div class="col-md-3" id="litho1">
+                    <hr id="litho-trait2">
+                </div>
+                <div class="col-md-4" id="litho2">
+                    <h3 class="font-weight-bold h2">Découvrons ensemble la lithothérapie</h3>
+                </div>
+                <div class="col-md-3" id="litho3">
+                    <hr id="litho-trait2">
+                </div>            
+                <div class="col-md-10 litho-text">
+                    <p>Pour comprendre le fonctionnement de la lithothérapie, il faut dans un premier temps reconnaître l’existence d’énergies non visibles qui nous composent et qui composent tout ce qui est manifesté, une aura d’énergie qui est aussi réelle que ce que vos yeux vous permettent de voir du plan physique. Ces énergies subtiles qui nous composent sont les manifestations de notre état d’être aux niveaux émotionnel, mental et spirituel. Si nous changeons d’émotion nous changeons la fréquence vibratoire de notre émotionnel.<br>
+                    Les minéraux ont une énergie forte avec des caractéristiques très marquées en fonction de leur composition et cristallisation, une énergie subtile et stable qui est utilisée en lithothérapie pour influencer notre corps subtile et obtenir des améliorations de notre état d’être. La portée de ces améliorations est à prendre comme des aides agissant à des niveaux différents en fonction de la pierre utilisée.<br>
+                    C’est une méthode de soin holistique car elle a une interaction à tous les niveaux de l’être. L’action se fera chez nous sur notre système d’énergies subtiles puis par interaction, se transmettra à nos autres plans de manifestation qui sont en relation avec le type d’énergie de la pierre, au niveau physique, émotionnel, mental et spirituel.<br>
+                    On porte des pierres de santé, qui seront en relation avec notre besoin, pour rétablir une harmonie, pour « soigner » un problème, aider par exemple contre des troubles digestifs, contre le stress, pour favoriser la guérison, réduire les douleurs, dynamiser un organe, retrouver le sommeil, lutter contre les migraines, permettre de passer de bonnes nuits réparatrices, … Le champ d’application n’a pas de limite.<br>
+                    Au niveau de l’efficacité elle est très variable et dépend principalement de deux points: la profondeur du problème et la sensibilité de la personne.
+                    </p>
+                </div> 
+            </div>           
+        </div>
+    </section>
+</main>
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('navbar') }}
+    <script>        
+        let titles = document.querySelectorAll('.tabs .tab-titles li a')
+        for(let title of titles){
+            title.addEventListener('click', function () {
+
+                // On récupère le numéro du titre
+                let num = this.getAttribute('data-tabnum')
+
+                // On masque la div qui est active
+                document.querySelector('.tabs > div.active').classList.remove('active')
+
+                // On reactive la div voulue
+                document.querySelector('#tab' + num).classList.add('active')
+
+                // On enlève la classe du titre actif
+                document.querySelector('.tabs .tab-titles li a.active').classList.remove('active')
+
+                // On active la classe de l'onglet cliqué
+                this.classList.add('active')
+            })
+        }
+        console.log('Bonjour Fabrice');
+        
+    </script>
+{% endblock %}

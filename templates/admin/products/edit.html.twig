@@ -1,0 +1,14 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title 'Modifier un produit' %}
+
+{% block body %}
+    <div class="container-fluid mt-3">
+        <h1 class="h2 text-center">Modifier un produit</h1>
+        {{ include ('admin/products/_form.html.twig') }}        
+    </div>    
+{% endblock %}
+{% block javascripts %}
+    {{parent() }}
+    {{ encore_entry_script_tags('delete_image') }}
+{% endblock %}

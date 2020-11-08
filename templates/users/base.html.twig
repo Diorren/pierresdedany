@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Utilisateurs{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}        
+        {% endblock %}
+    </head>
+    <body>
+    {% for label,messages in app.flashes %}
+        <div class="container-fluid m-0 p-0">                    
+            <div class="m-0 p-0 alert alert-{{ label }}">
+                {% for message in messages %}
+                    <p class="text-center mt-1 mb-1">{{ message | trans }}</p>
+                {% endfor %}                    
+            </div>
+        </div>            
+    {% endfor %}
+        <div class="navbar-brand-user"></div>
+        <main class="container-fluid">
+            <div class="row">
+                <header class="col-md-3 shadow">
+                    <div class="nav flex-column lateral mt-3">
+                        <a href="{{ path('app_home') }}">Accueil</a>
+                        <a href="{{ path('users') }}">Profil</a>
+                        <a href="#">Messages</a>
+                        <a href="{{ path('users_history')}}">Commandes</a>
+                    </div>                   
+                </header>
+                <div class="col-md-9">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </main>
+        <div class="navbar-brand-user fixed-bottom"></div>      
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>

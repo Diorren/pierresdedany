@@ -1,0 +1,31 @@
+{% extends 'users/base.html.twig' %}
+
+{% block title %} Profil de {{ app.user.firstname}} {{app.user.lastname}}{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        {% for message in app.flashes('message') %}
+            <div class="col-md-4">
+                <div class="alert alert-success">{{ message }}</div>
+            </div>
+        {% endfor %}
+        <h1 class="text-bold">Profil de {{ app.user.firstname }} {{ app.user.lastname}}</h1>
+        <p class="text-uppercase"><strong>Nom :</strong> {{ app.user.lastname }}</p>
+        <p class="text-uppercase"><strong>Prénom :</strong> {{ app.user.firstname}}</p>
+        <p><strong class="text-uppercase">Email :</strong> {{ app.user.email }}</p>
+        <p class="text-uppercase"><strong>Adresse :</strong> {{ app.user.address}}</p>
+        <p class="text-uppercase"><strong>Ville :</strong> {{ app.user.city }}</p>
+        <p class="text-uppercase"><strong>Code Postal :</strong> {{ app.user.postalCode }}</p>
+        <p class="text-uppercase"><strong>Téléphone :</strong> {{ app.user.phone }}</p>
+        <div class="row mt-5">            
+            <a href="{{ path('users_profile_edit') }}">
+                <button type="button" class="btn btn-primary ml-3 mr-3 p-2">Modifier le profil</button>
+            </a>            
+            <a href="{{ path('users_password_edit') }}">
+                <button type="button" class="btn btn-primary p-2">Modifier le mot de passe</button>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}
