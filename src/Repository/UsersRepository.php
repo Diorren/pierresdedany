@@ -51,6 +51,20 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         ;
     }
 
+    public function getLastCart(Users $users)
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin('u.carts', 'cart')
+            ->addSelect('cart')
+            ->orderBy('cart.id','DESC')
+            ->where('u.id = :id')
+            ->setParameter('id', $users->getId())
+            // ->andWhere('u.status = 0')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Users
     {

@@ -31,6 +31,7 @@ class CartController extends AbstractController
     }
 
     /**
+     * Permet de supprimer un produit du panier
      * @Route("/cart/remove/{id}", name="cart_remove")
      */
     public function remove($id, CartService $cartService)

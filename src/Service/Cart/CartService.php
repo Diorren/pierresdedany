@@ -14,7 +14,6 @@ class CartService
     {
         $this->session = $session;
         $this->productRepo = $productRepo;
-
     }
     public function add(int $id) {
         $cart = $this->session->get('cart', []);
@@ -40,6 +39,11 @@ class CartService
         $this->session->set('cart', $cart);
     }
     
+    /**
+     * Permet de récupérer le panier avec les produits et la quantités
+     *
+     * @return array
+     */
     public function getFullCart() : array
     {
         $cart = $this->session->get('cart', []);
@@ -53,8 +57,14 @@ class CartService
             ];
         }
         return $cartWithData;
+        dd($cartWithData);
     }
     
+    /**
+     * Permet de récupérer le total du panier
+     *
+     * @return float
+     */
     public function getTotal() : float
     {
         $total = 0;

@@ -78,6 +78,11 @@ class Users implements UserInterface
      */
     private $carts;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Status;
+
     public function __construct()
     {
         $this->carts = new ArrayCollection();
@@ -277,6 +282,18 @@ class Users implements UserInterface
                 $cart->setUser(null);
             }
         }
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->Status;
+    }
+
+    public function setStatus(bool $Status): self
+    {
+        $this->Status = $Status;
+
         return $this;
     }
 }
