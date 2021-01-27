@@ -15,6 +15,13 @@ class CartService
         $this->session = $session;
         $this->productRepo = $productRepo;
     }
+
+    /**
+     * Permet d'ajouter un produit dans le panier
+     *
+     * @param integer $id
+     * @return void
+     */
     public function add(int $id) {
         $cart = $this->session->get('cart', []);
         
@@ -26,10 +33,15 @@ class CartService
 
         $this->session->set('cart', $cart);
     }
-    
+    /**
+     * Permet d'enlever un produit du panier
+     *
+     * @param integer $id
+     * @return void
+     */
     public function remove(int $id) 
     {
-         $cart = $this->session->get('cart', []);
+        $cart = $this->session->get('cart', []);
 
         if(!empty($cart[$id]) && $cart[$id] >= 2){
             $cart[$id]--;
@@ -40,7 +52,7 @@ class CartService
     }
     
     /**
-     * Permet de récupérer le panier avec les produits et la quantités
+     * Permet de récupérer le panier avec les produits et la quantité
      *
      * @return array
      */
@@ -57,7 +69,6 @@ class CartService
             ];
         }
         return $cartWithData;
-        dd($cartWithData);
     }
     
     /**

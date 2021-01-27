@@ -62,7 +62,7 @@ class ResetPasswordController extends AbstractController
     public function checkEmail(): Response
     {
         // We prevent users from directly accessing this page
-        if (!$this->canCheckEmail()) {
+        if (!$this->getTokenObjectFromSession()) {
             return $this->redirectToRoute('app_forgot_password_request');
         }
 

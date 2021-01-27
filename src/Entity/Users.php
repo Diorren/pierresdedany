@@ -11,7 +11,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UsersRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email", "customerId"}, message="There is already an account with this email"
+ * ) 
  */
 class Users implements UserInterface
 {
@@ -79,9 +80,9 @@ class Users implements UserInterface
     private $carts;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $Status;
+    private $customerId;
 
     public function __construct()
     {
@@ -285,14 +286,14 @@ class Users implements UserInterface
         return $this;
     }
 
-    public function getStatus(): ?bool
+    public function getCustomerId(): ?string
     {
-        return $this->Status;
+        return $this->customerId;
     }
 
-    public function setStatus(bool $Status): self
+    public function setCustomerId(?string $customerId): self
     {
-        $this->Status = $Status;
+        $this->customerId = $customerId;
 
         return $this;
     }

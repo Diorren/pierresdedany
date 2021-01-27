@@ -2,11 +2,12 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Categories;
 use Faker\Factory;
+use App\Entity\Images;
 use App\Entity\Products;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Entity\Categories;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class AppFixtures extends Fixture
 {
@@ -27,25 +28,36 @@ class AppFixtures extends Fixture
             $manager->persist($categorie);
 
             // PRODUITS
-
+                for($k = 1; $k <=10; $k++)
+                
                 $product = new Products();
 
                 $name = $faker->userName();
-                $image = $faker->imageUrl(300, 200);
                 $content = '<p>'.join('</p><p>', $faker->paragraphs(1)).'</p>';
                 $createdAt = $faker->dateTimeBetween('-6 months');
                 $promo = $faker->boolean(70);
 
-                $product->setName($name)
-                    ->setImage($image)
+                $product->setName($name)                    
                     ->setContent($content)
-                    ->setCreated_at($createdAt)
-                    ->setQuantity(mt_rand(3, 10))
+                    ->setCreatedAt($createdAt)
+                    ->setStock(mt_rand(3, 10))
                     ->setPrice(mt_rand(30, 100))
                     ->setPromo($promo)
                     ->setCategories($categorie)
             ;
                 $manager->persist($product);
+                
+                // IMAGES
+                {
+                    $image = new Images();
+    
+                    $name = $faker->imageUrl(300, 200);
+    
+                    $image->setName($name)
+                          ->setProducts($product);
+    
+                    $manager->persist($image);
+                }
         }
         
         $manager->flush();

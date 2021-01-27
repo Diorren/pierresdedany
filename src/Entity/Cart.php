@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CartRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Cart
 {
@@ -27,22 +28,22 @@ class Cart
     /**
      * @ORM\Column(type="float")
      */
-    private $amount_ht;
+    private $amount_ht = 0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $amount_ttc;
+    private $amount_ttc = 0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $shipping_ht;
+    private $shipping_ht = 0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $shipping_ttc;
+    private $shipping_ttc = 0;
 
     /**
      * @ORM\Column(type="datetime")
@@ -54,9 +55,26 @@ class Cart
      */
     private $cartlines;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $statut = 0;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ref;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $payment_id;
+
     public function __construct()
     {
         $this->cartlines = new ArrayCollection();
+        $this->created_at = new \DateTime();
+        $this->ref = strtoupper($this->random_id());
     }
 
     public function getId(): ?int
@@ -158,11 +176,54 @@ class Cart
     {
         if ($this->cartlines->contains($cartline)) {
             $this->cartlines->removeElement($cartline);
-            // set the owning side to null (unless already changed)
+            // set the owning side to null (unless already changed) 
             if ($cartline->getCart() === $this) {
                 $cartline->setCart(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(bool $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getRef(): ?string
+    {
+        return $this->ref;
+    }
+
+    public function setRef(string $ref): self
+    {
+        $this->ref = $ref;
+
+        return $this;
+    }
+    /**
+     * Fonction qui permet de générer un uniqid de 8 caractères
+     */
+    private function random_id() {
+        $rand = substr(uniqid(), -9, -1);
+        return strtoupper($rand);
+    }
+
+    public function getPaymentId(): ?string
+    {
+        return $this->payment_id;
+    }
+
+    public function setPaymentId(?string $payment_id): self
+    {
+        $this->payment_id = $payment_id;
 
         return $this;
     }

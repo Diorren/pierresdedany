@@ -44,9 +44,62 @@
                 </tr>
             </tfoot>
         </table>
+        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#mollieModal">Passer au paiement</button>
     </div>
     {% else %}
         <p>Le panier est vide !</p>        
     {% endif %}
-
+    <!--Modal-->
+	<!--On crée le formulaire de Carte Bancaire-->
+	<div class="modal fade" id="mollieModal" tabindex="-1" role="dialog" aria-labelledby="mollieModalTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="card-image">
+					<img src="{{ asset('build/images/bien-etre.jpg') }}" class="img-fluid" alt="image pierres plantes eau">
+				</div>
+				<div class="modal-header card-header">				
+					<h5 class="modal-title" id="mollieModalTitle">Paiement par Carte</h5>
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          				<span aria-hidden="true">&times;</span>
+        			</button>
+				</div>
+				<div class="modal-body">
+					<form action="{{ path('users_payment') }}" method="post" id="formMollie">
+						<input type="hidden" name="total" value="{{ total }}">
+						<div class="form-group">
+							<label for="card-holder">Titulaire de la carte<span style="color:red;">*</span></label>
+							<input type="text" placeholder="ROBERT DUPONT" class="form-control" id="card-holder" required>
+							<div id="card-holder-error" class="field-error" role="alert"></div>				
+						</div>
+						<div class="form-group">
+							<label for="card-number">Numéro de carte<span style="color:red;">*</span></label>
+							<input type="text" placeholder="1234 5678 9012 3456" class="form-control" maxlength="16" id="card-number">
+							<div id="card-number-error" class="field-error" role="alert"></div>
+						</div>
+						<div class="form-group">
+							<label for="expiry-date">Date d'expiration<span style="color:red;">*</span></label>
+							<input type="text" placeholder="MM/YY" class="form-control" id="expiry-date" name="x" required>
+							<div id="expiry-date-error" class="field-error" role="alert"></div>				
+						</div>
+						<div class="form-group">
+							<label for="verification-code">Code de vérification<span style="color:red;">*</span></label>
+							<input type="text" placeholder="CVV" class="form-control" maxlength="3" id="verification-code">
+							<div id="verification-code-error" class="field-error" role="alert"></div>				
+						</div>
+						<div class="row justify-content-center">
+							<label for="total" class="total">Total :</label>
+								<span class="total ml-5">{{total|number_format(2, '.','.','.') }}&euro;</span>
+						</div>
+						<button style="text-transform:uppercase;font-size:1.4em;" class="btn btn-primary btn-block" type="submit" id="submit-button">Payer</button>
+					</form>
+				</div>
+				<div class="modal-footer mt-2 justify-content-center">
+					<div class="form-error" id="form-error" role="alert"></div>
+				</div>
+			</div>				
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 {% endblock %}

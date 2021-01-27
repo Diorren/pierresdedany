@@ -43,13 +43,13 @@
         </li>
       </ul>
       {# ICONE PANIER #}
-      <li class="row align-items-center panier">
+      <li class="row align-items-center justify-content-center panier">
         <a href="{{ path('cart_index') }}"><i class="fas fa-shopping-cart"></i>
           {% set totalQuantity = 0 %}
             {% for item in cart_items %}
               {% set totalQuantity = totalQuantity + item.quantity %}
             {% endfor %}
-          <span class="badge mb-3">{{ totalQuantity }}</span>
+          <span class="badge">{{ totalQuantity }}</span>
         </a>   
       </li>
         

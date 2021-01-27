@@ -15,118 +15,180 @@
             <p>{{ product.content }}</p>
 		<div>
 			<p><strong>Prix :</strong><span> {{ product.price }} &euro;</span></p>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stripeModal">Commander</button>        
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mollieModal">Commander</button>        
 		</div>
     </div>    
 </div>
-<!-- Modal -->
-<div class="modal fade" id="stripeModal" tabindex="-1" role="dialog" aria-labelledby="stripeModalTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="stripeModalTitle">Paiement par CB</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form action="{{ path('users_payment') }}" method="post" id="payment-form">
-					<input type="hidden" name="total" value="{{ product.price }}">
-					<div class="form-group">
-						<label for="card-element">Carte Bancaire:</label>
-						<div id="card-element"><!-- A Stripe Element will be inserted here. --></div>
-						<!-- Used to display form errors. -->
-						<div id="card-errors" role="alert"></div>
-					</div>
-					<div class='form-group'>
-						<div class='col-md-12'>
-							<div class='form-control'>
-								Total:
-								<span>{{product.price}}&euro;</span>
-							</div>
+<!--Modal-->
+	<!--On crée le formulaire de Carte Bancaire-->
+	<div class="modal fade" id="mollieModal" tabindex="-1" role="dialog" aria-labelledby="mollieModalTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="card-image">
+					<img src="{{ asset('build/images/bien-etre.jpg') }}" class="img-fluid" alt="image pierres plantes eau">
+				</div>
+				<div class="modal-header card-header">				
+					<h5 class="modal-title" id="mollieModalTitle">Paiement par Carte</h5>
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          				<span aria-hidden="true">&times;</span>
+        			</button>
+				</div>
+				<div class="modal-body">
+					<form action="{{ path('users_payment') }}" method="post" id="formMollie">
+						<input type="hidden" name="total" value="{{ product.price }}">
+						<div class="form-group">
+							<label for="card-holder">Titulaire de la carte<span style="color:red;">*</span></label>
+							<input type="text" placeholder="ROBERT DUPONT" class="form-control" id="card-holder" required>
+							<div id="card-holder-error" class="field-error" role="alert"></div>				
 						</div>
-					</div>
-					<button>Soumission Paiement</button>
-			    </form>
-		    </div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-			</div>
-        </div>
+						<div class="form-group">
+							<label for="card-number">Numéro de carte<span style="color:red;">*</span></label>
+							<input type="text" placeholder="1234 5678 9012 3456" class="form-control" maxlength="16" id="card-number">
+							<div id="card-number-error" class="field-error" role="alert"></div>
+						</div>
+						<div class="form-group">
+							<label for="expiry-date">Date d'expiration<span style="color:red;">*</span></label>
+							<input type="text" placeholder="MM/YY" class="form-control" id="expiry-date" name="x" required>
+							<div id="expiry-date-error" class="field-error" role="alert"></div>				
+						</div>
+						<div class="form-group">
+							<label for="verification-code">Code de vérification<span style="color:red;">*</span></label>
+							<input type="text" placeholder="CVV" class="form-control" maxlength="3" id="verification-code">
+							<div id="verification-code-error" class="field-error" role="alert"></div>				
+						</div>
+						<div class="row justify-content-center">
+							<label for="total" class="total">Total :</label>
+								<span class="total ml-5">{{product.price|number_format(2, '.','.','.') }}&euro;</span>
+						</div>
+						<button style="text-transform:uppercase;font-size:1.4em;" class="btn btn-primary btn-block" type="submit" id="submit-button">Payer</button>
+					</form>
+				</div>
+				<div class="modal-footer mt-2 justify-content-center">
+					<div class="form-error" id="form-error" role="alert"></div>
+				</div>
+			</div>				
+		</div>
 	</div>
-</div>
 {% endblock %}
 
 {% block javascripts %}
 {{ parent() }}
 <script>
-const stripe = new Stripe('pk_test_WvuZ0E71v7knpipzpbjZBwqC00c9mlTwqC');
-var elements = stripe.elements();
-console.log('fabrice');
-// Custom styling can be passed to options when creating an Element.
-// (Note that this demo uses a wider set of styles than the guide below.)
-var style = {
-base: {
-color: '#32325d',
-fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-fontSmoothing: 'antialiased',
-fontSize: '16px',
-'::placeholder': {
-color: '#aab7c4'
-}
-},
-invalid: {
-color: '#fa755a',
-iconColor: '#fa755a'
-}
-};
+// console.log('Fabrice');
+// 	// On initialise l'objet Mollie
+ 	const mollie = Mollie('pfl_kHdwCFBUAs', { locale: 'fr_FR', testmode: true });
 
-// Create an instance of the card Element.
-var card = elements.create('card', {style: style});
+// 	// On récupère les éléments
+// 	const form = document.getElementById('formMollie');
+// 	const formError = document.getElementById('form-error');
+// 	const submitButton =  document.getElementById('submit-button');
 
-// Add an instance of the card Element into the `card-element` <div>.
-card.mount('#card-element');
-var iframe = document.getElementsByName('__privateStripeFrame5')[0];
-iframe.style.width = '100%';
+// 	/* CREATION ET ACTIVATION DES 4 COMPOSANTS DU FORMULAIRE 
+// 	 * HOLDER INPUT
+// 	 * On crée le card holder input
+// 	 */
+// 	const cardHolder = mollie.createComponent('cardHolder');
+// 	cardHolder.mount('#card-holder');
 
+// 	// On gère les erreurs si elles se présentent
+// 	const cardHolderError = document.querySelector("#card-holder-error");
 
-// Handle real-time validation errors from the card Element.
-card.addEventListener('change', function (event) {
-var displayError = document.getElementById('card-errors');
-if (event.error) {
-displayError.textContent = event.error.message;
-} else {
-displayError.textContent = '';
-}
-});
+// 	cardHolder.addEventListener("change", event => {
+//   		if (event.error && event.touched) {
+//     		cardHolderError.textContent = event.error;
+//   		} else {
+//     		cardHolderError.textContent = "";
+//   		}
+// 	});
 
-// Handle form submission.
-var form = document.getElementById('payment-form');
-form.addEventListener('submit', function (event) {
-event.preventDefault();
+// 	/* NUMBER INPUT 
+// 	 * On crée le card number input
+// 	 */
+// 	const cardNumber = mollie.createComponent('cardNumber');
+// 	cardNumber.mount('#card-number');
 
-stripe.createToken(card).then(function (result) {
-if (result.error) { // Inform the user if there was an error.
-var errorElement = document.getElementById('card-errors');
-errorElement.textContent = result.error.message;
-} else { // Send the token to your server.
-stripeTokenHandler(result.token);
-}
-});
-});
+// 	// On gère les erreurs si elles se présentent
+// 	const cardNumberError = document.querySelector("#card-number-error");
 
-// Submit the form with the token ID.
-function stripeTokenHandler(token) { // Insert the token ID into the form so it gets submitted to the server
-var form = document.getElementById('payment-form');
-var hiddenInput = document.createElement('input');
-hiddenInput.setAttribute('type', 'hidden');
-hiddenInput.setAttribute('name', 'stripeToken');
-hiddenInput.setAttribute('value', token.id);
-form.appendChild(hiddenInput);
+// 	cardNumber.addEventListener("change", event => {
+//   		if (event.error && event.touched) {
+//     		cardNumberError.textContent = event.error;
+//   		} else {
+//     		cardNumberError.textContent = "";
+//   		}
+// 	});
 
-// Submit the form
-form.submit();
-}
+// 	/* EXPIRY DATE INPUT
+// 	 * On crée le expiry date input
+// 	 */
+// 	const expiryDate = mollie.createComponent('expiryDate');
+// 	expiryDate.mount('#expiry-date');
+
+// 	// On gère les erreurs si elles se présentent
+// 	const expiryDateError = document.querySelector("#expiry-date-error");
+
+// 	expiryDate.addEventListener("change", event => {
+//   		if (event.error && event.touched) {
+//     		expiryDateError.textContent = event.error;
+//   		} else {
+//     		expiryDateError.textContent = "";
+//   		}
+// 	});
+
+// 	/* VERIFICATION CODE INPUT
+// 	 * On crée le verification code input
+// 	 */
+// 	const verificationCode = mollie.createComponent('verificationCode');
+// 	verificationCode.mount('#verification-code');
+
+// 	// On gère les erreurs si elles se présentent
+// 	const verificationCodeError = document.querySelector("#verification-code-error");
+
+// 	verificationCode.addEventListener("change", event => {
+//   		if (event.error && event.touched) {
+//     		verificationCodeError.textContent = event.error;
+//   		} else {
+//     		verificationCodeError.textContent = "";
+//   		}
+// 	});
+
+// 	// On désactive les champs du form et le button
+// 	function disableForm() {
+// 		submitButton.disabled = true;
+// 	}
+// 	// On active les champs du form et le button
+// 	function enableForm() {
+// 		submitButton.disabled = false;
+// 	}
+
+// 	// On ajoute un écouteur d'évènement de soumission de formulaire
+// 	form.addEventListener('submit', async e => {
+// 		e.preventDefault();
+// 		disableForm();
+
+// 		// Possibilité de remettre à zéro le form
+// 		formError.textContent = "";
+
+// 		// On crée un token pour le paiement
+// 		const { token, error } = await mollie.createToken();
+
+// 		if (error) {
+// 			enableForm();
+// 			formError.textContent = error.message;
+// 			return;
+// 		}
+		
+// 		// On ajoute le token dan le formulaire
+// 		const tokenInput = document.createElement('input');
+// 		tokenInput.setAttribute('type', 'hidden');
+// 		tokenInput.setAttribute('name', 'cardToken');
+// 		tokenInput.setAttribute('value', 'token');
+
+// 		form.appendChild(tokenInput);
+
+// 		// On soumet le formulaire
+// 		form.submit();
+// 	});
 </script>
 
 {% endblock %}

@@ -51,8 +51,7 @@ class ProductsController extends AbstractController
     public function showProductsByCategory(Categories $categories, ProductsRepository $productRepo,PaginatorInterface $paginator, Request $request)
     {
         $data = $productRepo->getProductsByCategory($categories->getId());
-        //dd($request->attributes->all());
-        //dd($data);
+        
         $productsByCat = $paginator->paginate(
             $data,   // Requête contenant les données à paginer (les produits)
             $request->query->getInt('page', 1), // N° de la page en cours passé dans l'URL, 1 par défaut si aucune page
@@ -60,7 +59,7 @@ class ProductsController extends AbstractController
         );
         return $this->render('categories/show.html.twig', [
             'productsByCat' => $productsByCat,
-            'category' => $categories            
+            'category' => $categories           
         ]);
     }
 }

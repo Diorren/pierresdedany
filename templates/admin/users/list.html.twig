@@ -34,7 +34,7 @@
                         <td>{{ user.email }}</td>
                         <td>{{ user.phone }}</td>
                         {% for cart in user.carts %}
-                            <td>{{ user.carts | length > 0 }}</td>
+                            <td><span>{{ user.carts | length > 0 }}</span></td>
                         {% endfor %}
                         <td></td>                                                   
                     </tr>

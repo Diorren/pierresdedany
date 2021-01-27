@@ -11,10 +11,16 @@
         </a>
             <h4 class="card-title">{{ product.name }}</h4>
             <p class="card-text">{{ product.content | raw }}</p>
+            {% if product.stock < 1 %}
+                <p class="alert alert-warning">Victime de son succès !</p>
+            {% endif %}
+            
             <div class="row justify-content-between align-items-center">
                 <p class="card-text btn btn-outline-primary">Prix: {{ product.price }} &euro;</p>
-                <a href="{{path('cart_add', {'id': product.id}) }}" class="btn btn-success float-right"><i class="fas fa-shopping-cart"></i>Ajouter</a>
-                <p><a href="{{ path('product_single',{'slug':product.slug}) }}" class="btn bg-info text-white">Acheter</a></p>
+                {% if product.stock > 0 %}
+                    <a href="{{path('cart_add', {'id': product.id}) }}" class="btn btn-success float-right"><i class="fas fa-shopping-cart"></i>Ajouter</a>
+                    <p><a href="{{ path('product_single',{'slug':product.slug}) }}" class="btn bg-info text-white">Acheter</a></p>                
+                {% endif %}
             </div>
         </div>
     </div>

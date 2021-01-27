@@ -2,10 +2,10 @@
 
 namespace App\EventSubscriber;
 
-use App\Repository\CategoriesRepository;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Twig\Environment;
+use App\Repository\CategoriesRepository;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CategoriesSubscriber implements EventSubscriberInterface
 {
@@ -17,6 +17,13 @@ class CategoriesSubscriber implements EventSubscriberInterface
         $this->twig = $twig;
         $this->categoriesRepository = $categoriesRepository;
     }
+
+    /**
+     * Fonction Subscriber qui permet d' afficher le changement des catégories 
+     *
+     * @param ControllerEvent $event
+     * @return void
+     */
     public function onKernelController(ControllerEvent $event)
     {
         $this->twig->addGlobal('categories', $this->categoriesRepository->findAll());

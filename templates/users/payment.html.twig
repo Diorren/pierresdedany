@@ -10,7 +10,22 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <h1>Récapitulatif de votre commande N°  </h1>     
+      {% for cart in carts %}
+        <h1>Récapitulatif de votre commande N° {{ cart.id }} </h1>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      {% endfor %}
       </div>
     </div>
   </div>

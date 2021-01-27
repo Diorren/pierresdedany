@@ -12,10 +12,10 @@
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
-        "friendsofsymfony/ckeditor-bundle": "^2.2",
+        "friendsofsymfony/ckeditor-bundle": "^2.3",
         "knplabs/knp-paginator-bundle": "^5.3",
+        "mollie/mollie-api-php": "^2.26",
         "sensio/framework-extra-bundle": "^5.1",
-        "sensiolabs/security-checker": "^6.0",
         "stripe/stripe-php": "^7.52",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.1.*",
@@ -49,15 +49,16 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "fzaninotto/faker": "^1.9",
         "symfony/browser-kit": "^5.1",
         "symfony/css-selector": "^5.1",
         "symfony/debug-bundle": "^5.1",
         "symfony/maker-bundle": "^1.0",
         "symfony/monolog-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^5.1",
+        "symfony/phpunit-bridge": "^5.2",
         "symfony/stopwatch": "^5.1",
         "symfony/twig-bundle": "^5.1",
-        "symfony/var-dumper": "^5.1",
+        "symfony/var-dumper": "5.1.*",
         "symfony/web-profiler-bundle": "^5.1"
     },
     "config": {
@@ -89,8 +90,7 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "security-checker security:check": "script"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
