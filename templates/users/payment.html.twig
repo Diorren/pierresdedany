@@ -9,9 +9,9 @@
 {% block body %}
   <div class="container">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-10">
       {% for cart in carts %}
-        <h1>Récapitulatif de votre commande N° {{ cart.id }} </h1>
+        <h1>Récapitulatif de votre commande N° {{ cart.ref }} </h1>
         <table>
           <thead>
             <tr>

@@ -2,6 +2,8 @@
 
 namespace App\Service\Cart;
 
+use App\Entity\Cart;
+use App\Entity\Cartline;
 use App\Repository\ProductsRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -24,7 +26,6 @@ class CartService
      */
     public function add(int $id) {
         $cart = $this->session->get('cart', []);
-        
         if(!empty($cart[$id])){
             $cart[$id]++;
         }else{            
@@ -85,5 +86,14 @@ class CartService
             $total += $item['product']->getPrice() * $item['quantity'];
         }
         return $total;
+    }
+
+    /**
+     * Permet de supprimer la session en cours
+     */
+    public function removeSession()
+    {
+        $this->session->invalidate();            
+        return $this;
     }
 }

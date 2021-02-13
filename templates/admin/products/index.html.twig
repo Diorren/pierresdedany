@@ -37,7 +37,7 @@
 					
 					{# Condition qui affiche une seule image s'il existe des images #}
 					{% if product.images is not empty %}
-						<img src="{{ asset('uploads/'~ product.images[0].name) }}" alt="Image" width="100">						
+						<img src="{{ asset('build/images/'~ product.images[0].name) }}" alt="Image" width="100">						
 					{% endif %}
 					</td>
 					<td class="text-center">

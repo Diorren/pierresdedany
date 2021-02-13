@@ -37,7 +37,7 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
     }
 
     /**
-     * Requête pour listUsers et Cart
+     * Requête pour lister les utilisateurs et leur panier
      * @return Users[]
      */
     public function getListUsers()

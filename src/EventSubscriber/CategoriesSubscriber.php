@@ -19,7 +19,7 @@ class CategoriesSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Fonction Subscriber qui permet d' afficher le changement des catégories 
+     * Fonction Subscriber qui permet de gérer le changement de nom ou l'ajout de catégories 
      *
      * @param ControllerEvent $event
      * @return void

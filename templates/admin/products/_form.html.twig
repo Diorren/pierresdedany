@@ -17,7 +17,7 @@
                 {# Boucle qui affiche toutes les images du produit #}
                     {% for image in product.images %}
                         <div class="row align-items-center ml-2 mt-2">           
-                            <img src="{{ asset('uploads/' ~ image.name) }}" alt="Image" width="100">	
+                            <img src="{{ asset('build/images/' ~ image.name) }}" alt="Image" width="100">	
                             <p class="ml-3">
                                 <a href="{{ path('admin_products_delete_image', {id: image.id}) }}"
                                 data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">Supprimer</a>					

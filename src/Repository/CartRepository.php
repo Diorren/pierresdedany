@@ -20,6 +20,9 @@ class CartRepository extends ServiceEntityRepository
         parent::__construct($registry, Cart::class);
     }
 
+    /**
+     * Récupère le dernier panier d'un utilisateur connecté
+     */
     public function getLastCart(Users $users)
     {
         return $this->createQueryBuilder('c')
@@ -35,15 +38,37 @@ class CartRepository extends ServiceEntityRepository
         ;
     }
 
-    /*
-    public function findOneBySomeField($value): ?Cart
+    /**
+     * Permet de récupérer le nombre de commandes validées par un utilisateur
+     */
+    public function getPaidCart(Users $users)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
+        ->leftJoin('c.user', 'user')
+        ->addSelect('user')
+        ->andWhere('user.id = :id')
+        ->setParameter('id', $users->getId())
+        ->andWhere('c.statut = :statut')
+        ->setParameter('statut', true)
+        ->getQuery()
+        ->getResult()
+    ;
+    }
+    
+    
+    /* public function getTotalCarts(Users $users)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.user', 'user')
+            ->addSelect('user')
+            ->andWhere('user.id = :id')
+            ->setParameter('id', $users->getId())
+            ->andWhere('c.statut = :statut')
+            ->setParameter('statut', true)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
     */
+    
 }

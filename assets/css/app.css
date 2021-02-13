@@ -260,17 +260,10 @@ html, body {
     background-color: rgb(247, 216, 191);
     text-transform: uppercase;
 }
-.title-bestsellers {
-    background-color: rgb(230, 145, 76);
-    text-transform: uppercase;
-}
-.article {
-    position: relative;
-}
 #promo {
     position: absolute;
-    top: 0;
-    left: 50%;
+    top: 3%;
+    right: 5%;
 }
 
 /* LITHOTHERAPIE */
@@ -399,6 +392,17 @@ html, body {
 }
 
 /* SEARCH */
+.search-page {
+    margin-top: 10em;
+    margin-bottom: 0;    
+}
+.search {
+    position: fixed;
+    margin-left: 3em;
+}
+.right-search {
+    padding-right: 5em;
+}
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -613,7 +617,7 @@ html, body {
     position: absolute;
     z-index: 0;
 }
-.card-header {
+.card-header-cart {
     width: 100%;
     color: #000;
     position: absolute;

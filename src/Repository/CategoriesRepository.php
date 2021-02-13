@@ -26,19 +26,4 @@ class CategoriesRepository extends ServiceEntityRepository
         parent::__construct($registry, Categories::class);
         $this->paginator = $paginator;
     }
-    
-    // /**
-    //  * Affiche les produits par catégorie
-    //  *
-    //  * @return void
-    //  */
-    // public function getProductsByCategory()
-    // {
-    //     return $this->createQueryBuilder('c')
-    //         ->leftJoin('c.products', 'p')
-    //         ->addSelect('p')
-    //         ->getQuery()                    
-    //         ->getResult()  
-    //     ;    
-    // }
 }

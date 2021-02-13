@@ -99,17 +99,17 @@
                 </li>
                 <p class="trait-vert mt-1"></p>
                 <li class="nav-item">
-                    <a class="nav-link pl-4" data-tabnum="1" href="#bestsellers" id="sales">Meilleures ventes</a>
+                    <a class="nav-link pl-4" data-tabnum="1" href="#bests" id="sales">Meilleures ventes</a>
                 </li>
             </ul>
             <div class="row active m-1" id="tab0"> 
-                {% for data in products %}
-                    {% include "admin/products/_product.html.twig" with {product: data.products} %}
+                {% for data in news %}
+                    {% include "products/_product.html.twig" with {product: data.news} only %}
                 {% endfor %}         
             </div>
             <div class="row m-1" id="tab1">                
-                {% for data in products %}
-                    {% include "admin/products/_bestsellers.html.twig" with {product: data.products} %}
+                {% for data in bests %}
+                    {% include "products/_bestsellers.html.twig" with {product: data.bests} only %}
                 {% endfor %}                      
             </div>                 
         </div>
@@ -209,8 +209,6 @@
                 // On active la classe de l'onglet cliqué
                 this.classList.add('active')
             })
-        }
-        console.log('Bonjour Fabrice');
-        
+        }        
     </script>
 {% endblock %}

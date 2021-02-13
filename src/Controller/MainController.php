@@ -18,9 +18,10 @@ class MainController extends AbstractController
      */
     public function index(ProductsRepository $newsProductRepo, ProductsRepository $promoProductRepo)
     {
+        //dd($newsProductRepo->findNewsProducts(4));
         return $this->render('main/index.html.twig', [
-            'products' => $newsProductRepo->findNewsProducts(4),
-            'products' => $promoProductRepo->findPromoProducts(4)
+            'news' => $newsProductRepo->findNewsProducts(4),
+            'bests' => $promoProductRepo->findPromoProducts(4)
         ]);
     }   
     
@@ -57,7 +58,7 @@ class MainController extends AbstractController
     public function show($slug, ProductsRepository $repo)
     {
         $product = $repo->findOneBySlug($slug);
-        return $this->render('admin/products/_product.html.twig', [
+        return $this->render('products/_product.html.twig', [
             'product' => $product
         ]);
     }
@@ -70,7 +71,7 @@ class MainController extends AbstractController
     public function show2($slug, ProductsRepository $repo)
     {
         $product = $repo->findOneBySlug($slug);
-        return $this->render('admin/products/_bestsellers.html.twig', [
+        return $this->render('products/_bestsellers.html.twig', [
             'product' => $product
         ]);
     }

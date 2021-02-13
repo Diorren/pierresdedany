@@ -2,14 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Cart;
-use App\Entity\Users;
-use App\Entity\Products;
 use App\Form\EditProfileType;
 use Mollie\Api\MollieApiClient;
 use App\Repository\CartRepository;
 use Symfony\Component\Mime\Address;
-use App\Repository\ProductsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,15 +79,13 @@ class UsersController extends AbstractController
      *
      * @Route("/users/payment", name="users_payment")
      * @IsGranted("ROLE_USER")
-     *
-     * @return Response
      */
     public function payment(Request $request, CartRepository $cartRepo, EntityManagerInterface $manager)
     {
         if ($request->isMethod('POST')) {
             $user = $this->getUser();
-
             $cart = $cartRepo->getLastCart($user);
+          
             $orderId = $cart->getRef();
             $amount = $_POST['total'];
             
@@ -180,7 +174,6 @@ class UsersController extends AbstractController
         }
 
         // Si le paiement a réussi un message flash apparaît et on envoie un mail
-        $orderId = $cart->getRef(); // ???
         
         if (!empty($payment)) {
             $this->addFlash('success', 'Paiement réussi');
@@ -213,7 +206,7 @@ class UsersController extends AbstractController
     public function historyPayment(CartRepository $cartRepo)
     {
         return $this->render('users/payment.html.twig', [
-            'carts' => $cartRepo->findAll(),
+            'carts' => $cartRepo->findAll()
         ]);
     }
 }

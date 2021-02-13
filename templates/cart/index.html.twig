@@ -44,7 +44,11 @@
                 </tr>
             </tfoot>
         </table>
-        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#mollieModal">Passer au paiement</button>
+		{% if app.user %}
+        	<button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#mollieModal">Passer au paiement</button>
+		{% else %}
+			<div class="alert alert-danger h2">Vous devez être connecté pour passer au paiement !</div>
+		{% endif %}
     </div>
     {% else %}
         <p>Le panier est vide !</p>        
@@ -57,7 +61,7 @@
 				<div class="card-image">
 					<img src="{{ asset('build/images/bien-etre.jpg') }}" class="img-fluid" alt="image pierres plantes eau">
 				</div>
-				<div class="modal-header card-header">				
+				<div class="modal-header card-header-cart">				
 					<h5 class="modal-title" id="mollieModalTitle">Paiement par Carte</h5>
         			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           				<span aria-hidden="true">&times;</span>

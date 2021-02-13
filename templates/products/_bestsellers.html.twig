@@ -1,0 +1,36 @@
+{% set url = path('products_single',{slug: product.slug}) %}
+    <article class="col-md-3">
+        <div class="card mb-3">
+            <h3 class="h4 card-header text-white bg-warning">Catégories: {{product.categories.name}}</h3>
+            <div class="card-body bg-danger bg-light">
+                {% if product.promo == true %}
+                    <p class="mb-1" id="promo" style="color:red;">Promotion</p>               
+                {% endif %}
+                <a href="{{url}}">
+                    {% if product.images is not empty %}
+                        <img id="collection" src="{{ asset('build/images/'~ product.images[0].name) }}" alt="{{product.name}}"
+                        style="height:200px;width:100%;display:block;">
+                    {% endif %}
+                </a>
+                <h4 class="mt-2 card-title">{{ product.name }}</h4>
+                <p class="card-text">{{ product.content | raw }}</p>
+
+                <!--Condition pour le stock négatif avec affichage message-->
+                {% if product.stock < 1 %}
+                    <p class="alert alert-warning">Victime de son succès !</p>
+                {% endif %}
+            
+                <div class="row justify-content-between align-items-center mb-3">
+            
+                <!--Condition pour le stock positif avec affichage message-->
+                {% if product.stock > 0 %}
+                    <a href="{{ path('product_single',{'slug':product.slug}) }}" class="btn bg-info text-white ml-3">Acheter</a>                
+                    <a href="{{path('cart_add', {'id': product.id}) }}" class="btn btn-success float-right mr-3">
+                        <i class="fas fa-shopping-cart"></i> Ajouter
+                    </a>
+                {% endif %}
+                </div>
+                <p class="card-text btn btn-block btn btn-outline-secondary text-center">Prix: {{ product.price }} &euro;</p>
+            </div>
+        </div>
+    </article>

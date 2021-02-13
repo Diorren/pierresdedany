@@ -29,22 +29,35 @@ class ProductsRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
+    /**
+     * Récupère les produits par date dans un ordre décroissant avec une certaine limite
+     *
+     * @param [type] $limit
+     * @return Products[]
+     */
     public function findNewsProducts($limit)
     {
         return $this->createQueryBuilder('p')
-            ->select('p as products')
-            ->orderBy('p.stock','DESC')
+            ->select('p as news')
+            ->orderBy('p.created_at', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;
     }
 
+    /**
+     * Récupère les produits en promotion avec une certaine limite
+     *
+     * @param [type] $limit
+     * @return Products[]
+     */
     public function findPromoProducts($limit)
     {
         return $this->createQueryBuilder('p')
-            ->select('p as products')
-            ->orderBy('p.price', 'DESC')
+            ->select('p as bests')
+            ->andWhere('p.promo = :promo')
+            ->setParameter('promo', true)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
@@ -128,6 +141,8 @@ class ProductsRepository extends ServiceEntityRepository
     
     /**
      * Affiche les produits par catégorie
+     *
+     * @param [type] $id
      * @return void
      */
     public function getProductsByCategory($id)
